@@ -1,0 +1,22 @@
+{
+  "name": "async-js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Marko193/async-JS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Marko193/async-JS/issues"
+  },
+  "homepage": "https://github.com/Marko193/async-JS#readme",
+  "dependencies": {
+    "superagent": "^6.1.0"
+  }
+}
