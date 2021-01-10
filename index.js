@@ -9,13 +9,18 @@ const superAgent = require('superagent');
 fs.readFile(`${__dirname}/dog.txt`, (err, data)=>{
     console.log(`Breed: ${data}`);
 
-    superAgent.get(`https://dog.ceo/api/breed/${data}/images/random`)
-    .end((err, res) => {
-        if(err) return console.log(err.message);
+    //pending promise in the begining - to get the data
+    superAgent
+    .get(`https://dog.ceo/api/breed/${data}/images/random`)
+    .then(res => {
         console.log(res.body.message);
 
         fs.writeFile('dog-image.txt', res.body.message, err =>{
             console.log('Random dog image saved to the file!');
         });
+        //reject(error) promise - if we get an error
+    })
+    .catch(err => {
+        console.log(err.message);
     });
 });
