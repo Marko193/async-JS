@@ -18,7 +18,7 @@ const readFilePro = file => {
     
         });
     });
-}
+};
 
 //How to write to file using writeFilePro
 const writeFilePro = (file, data) => {
@@ -32,6 +32,32 @@ const writeFilePro = (file, data) => {
     });
 };
 
+//create async f()
+//It keeps run in back when it perform the code while the rest code keep run in the Event Loop
+//------------THE ASYNC \ AWAIT PRINCIPLES-----------------------
+//stop the code run, wait until the promise will be return
+//with its value & then store that value into a var
+const getDogPic = async() => {
+    try {
+        const data = await readFilePro(`${__dirname}/dog.txt`);
+        console.log(`Breed: ${data}`);
+    
+        const res = await superagent.get(
+            `https://dog.ceo/api/breed/${data}/images/random`
+        );
+        console.log(res.body.message);
+    
+        await writeFilePro('dog-image.txt', res.body.message);
+        console.log('Random dog image saved to the file!');
+    }
+    catch(err) {
+        console.log(err.message);
+    }
+};
+
+getDogPic();
+
+/*---------------- THE SAME AS BEFORE----------------
 //the implement of read file with promise constructor
 //without callback hell
 readFilePro(`${__dirname}/dog.txt`)
@@ -49,3 +75,4 @@ readFilePro(`${__dirname}/dog.txt`)
     .catch(err => {
         console.log(err.message);
     });
+*/
