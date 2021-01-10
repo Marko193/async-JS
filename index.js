@@ -52,11 +52,37 @@ const getDogPic = async() => {
     }
     catch(err) {
         console.log(err.message);
+        throw(err); //mark promise as rejected
     }
+    return "2: In process!"; 
 };
 
-getDogPic();
+//IIFE - define f() & call it right here
+//the best way of doing like down
+(async ()=>{
+    try {
+        console.log("1: Will get dog pics!");
+        const x = await getDogPic();
+        console.log(x);
+        console.log("3: Done!");
+    } catch(err) {
+        console.log('Error!');
+    }
+})();
 
+
+//const x = getDogPic(); if we want to return val in this way - get <pending>
+//console.log(x); promise <pending> - it`s a promise, which already processed into an event loop
+/*
+//use this way to get the return from promise
+console.log("1: Will get dog pics!");
+getDogPic().then(x =>{
+    console.log(x);
+    console.log("3: Done!");
+})
+.catch(err =>{
+    console.log('Error!');
+});
 /*---------------- THE SAME AS BEFORE----------------
 //the implement of read file with promise constructor
 //without callback hell
